@@ -5,7 +5,6 @@ def callLimit(limit:int):
            nonlocal count
            if count < limit:
                 count += 1
-                # print(f"Appel #{count} de la fonction")
                 return function(*args, **kwds)
            else:
                print("limit reached")

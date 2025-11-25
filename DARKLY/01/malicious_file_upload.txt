@@ -1,0 +1,10 @@
+echo "GIF89a<?php echo 'je suis mauvais'; ?>" > /tmp/bad.php.peg && curl -X POST -F "Upload=Upload" -F "uploaded=@/tmp/bad.php;type=image/jpeg" "http://localhost:8080/index.php?page=upload" | grep "flag"
+
+explication :
+
+Cette ligne permet d upload un fichier en utilisant CURL, depuis le site les seuls extension acceptees sont JPG et JPEG, les codes malveillant les plus utilise
+sont en php, normalement les sites les protege en verifiant le MIME type, l extension, les magic bytes qui sont les 4 premiers octets du fichier ou meme parfois le contenu complet 
+contrairement au site qui lui verifie seulement l extension car le reste est automatiquement gerer par le navigateur une extension comme : lol.php.jpg fonctionne, 
+mais depuis CURL il faut modifier le type depuis la requete : type=image/jpeg car curl met le type reel du ficher uploader.
+
+Dans notre cas le GIF ne sert a rien mais il est souvent utiliser pour bypass la verification des magic bytes

@@ -1,0 +1,7 @@
+explication:
+
+Ici on utilise la faille des cookies non proteger, quand on arrive sur le site qu on fait F12
+que l on vas dans l onglet storqage et ensuite cooki on peut voir un cookie nome I_am_admin, 
+sa valeurs et encrypte en MD5 cest un moyen de crypte la valeur, cette valeur decrypte vaut "false"
+il nous suffit donc de remplacer cette valeur par true dans ce meme lengage (b326b5062b2f0e69046810717534cb09)
+de refresh la page et nous voila avec les droits admin. 

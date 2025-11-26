@@ -1,6 +1,6 @@
 http://localhost:8080/index.php?page=redirect&site=youtube.fr
 
-flag: b9e775a0291fed784a2d9680fcfad7edd6b8cdf87648da647aaf4bba288bcab3
+
 
 explication (OPEN REDIRECT):
 

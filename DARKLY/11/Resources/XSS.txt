@@ -1,0 +1,17 @@
+Ici on se rend compte que quand on essaye de cliquer sur les images, seulement une nous permet
+d’interagir avec elle. On regarde l’URL et on se rend compte qu’on peut faire une XSS (reflected cross‑site scripting)
+via injection d’URI (uniform resource identifier). Comment voir ça ? Car dans l’URL :
+
+http://localhost:8080/index.php?page=media&src=nsa
+
+on peut voir : (src=nsa). Voici notre faille : elle va nous permettre d’injecter du contenu dans une balise.
+Dans une injection URI, le but est de remplacer (dans notre cas "nsa") par un schéma data: pour injecter du code JS.
+
+On peut voir dans l’URL en dessous que "nsa" a été remplacé par :
+
+data:text/html;base64,PHNjcmlwdD5hbGVydCg0Mik8L3NjcmlwdD4=
+
+data est le nom de la structure, ensuite il y a son type, comment c’est encodé, et le message qui nous permet de tester l’injection.
+
+URL :
+http://localhost:8080/index.php?page=media&src=data:text/html;base64,PHNjcmlwdD5hbGVydCg0Mik8L3NjcmlwdD4=

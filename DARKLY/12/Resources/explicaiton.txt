@@ -1,0 +1,32 @@
+expliaction:
+
+Dans ce ctf on a chercher des fichier cacher, pour cela j ai une wordlist qui est la meme
+que dans dirb qui fait tout automatiquement. Le scrypt vas tester les pages les plus utilise.
+Petit soucis sur Darkly meme les pages qui n existe pas nous renvoies des codes 200 comme si 
+ca fonctionnait tres bien, on vas donc devoir comparer la taille. tout les fichier vide ne vont 
+pas etre pris en compte. voici le scrypt : 
+
+#!/bin/bash
+
+url="http://localhost:8080/"
+wordlist="wordlist.txt"            
+
+# Récupère la taille d'une page fausse (ex: page inconnue)
+baseline_size=$(curl -s -o /dev/null -w "%{size_download}" "${url}thispagedoesnotexist")
+
+echo "Taille baseline des fausses pages : $baseline_size bytes"
+
+while read line; do
+    size=$(curl -s -o /dev/null -w "%{size_download}" "$url$line")
+
+    if [ "$size" != "$baseline_size" ]; then
+        echo "[+] Trouvé différent : $url$line ($size bytes)"
+    fi
+done < "$wordlist"
+
+une fois ceci fait on voit toutes les pages existente mais non accesible directement depuis la page
+dans cette liste ce qui vas nous interesser c est la page admin et robot.txt.
+en allant dans robots.txt on a deux ligne. On vas recuperer la premiere qui nous envoie vers un site
+on on peut telecharger un fichier nome htpasswd. En le telechargeant on peut voir "root:437394baff5aa33daa618be47b75cb49"
+on decrypt le mdp hashe au format MD5 et on obtient : qwerty123@. Ensuite plus qu a aller sur la 
+page admin/ et ce connecter en tant que root.

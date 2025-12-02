@@ -1,0 +1,6 @@
+expliaction:
+
+Cette fois si on vas utiliser le deuxieme dossier trouver dans robots.txt, ca nous amene sur une
+page avec plusieurs repo qui coniennent chacun un readme j imagine donc qu il faut trouver la 
+bonne combinaison de repertoire. j ai donc un scryp qui me permet de telecharger tout les readme
+dans un dossier. plus qu a "grep flag readmes/*" ca va nous donner le flag ainsi que le chemin.

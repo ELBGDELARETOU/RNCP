@@ -1,0 +1,6 @@
+explication:
+Ici on peut tout simplement modifier l adresse mail sur laquelle on recoit le mail pour reinisialiser son mdp.
+
+solution pour securiser:
+2fa, re-demander le mail pour verifier l identite, et ne surtout pas utiliser de variable cacher pour une donne aussi sensible que le mail de l admin.
+hiden n est pas du tout un mecanisme de securiter.

@@ -7,5 +7,6 @@ J’imagine donc qu’il faut trouver la bonne combinaison de répertoires.
 J’ai donc écrit un script qui me permet de télécharger tous les fichiers README dans un dossier.
 Il ne reste plus qu’à exécuter : "grep flag readmes/*" 
 Cela nous donnera le flag ainsi que le chemin du fichier qui le contient.
+
 solution:
-Cela nous donnera le flag ainsi que le chemin du fichier qui le contient.
+-ne jamais exposer des fichier sensible

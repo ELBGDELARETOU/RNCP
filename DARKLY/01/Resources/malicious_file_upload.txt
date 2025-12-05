@@ -1,10 +1,16 @@
-echo "GIF89a<?php echo 'je suis mauvais'; ?>" > /tmp/bad.php.peg && curl -X POST -F "Upload=Upload" -F "uploaded=@/tmp/bad.php;type=image/jpeg" "http://localhost:8080/index.php?page=upload" | grep "flag"
-
 explication :
 
-Cette ligne permet d upload un fichier en utilisant CURL, depuis le site les seuls extension acceptees sont JPG et JPEG, les codes malveillant les plus utilise
-sont en php, normalement les sites les protege en verifiant le MIME type, l extension, les magic bytes qui sont les 4 premiers octets du fichier ou meme parfois le contenu complet 
-contrairement au site qui lui verifie seulement l extension car le reste est automatiquement gerer par le navigateur une extension comme : lol.php.jpg fonctionne, 
-mais depuis CURL il faut modifier le type depuis la requete : type=image/jpeg car curl met le type reel du ficher uploader.
+Cette ligne permet d’uploader un fichier en utilisant CURL. Depuis le site, les seules extensions acceptées sont JPG et JPEG. Les codes malveillants les plus utilisés sont en PHP. Normalement, les sites les protègent en vérifiant le type MIME, l’extension, les magic bytes qui sont les 4 premiers octets du fichier, ou même parfois le contenu complet.
+Contrairement au site qui, lui, vérifie seulement l’extension, car le reste est automatiquement géré par le navigateur. Une extension comme : lol.php.jpg fonctionne, mais depuis CURL, il faut modifier le type depuis la requête : type=image/jpeg, car curl met le type réel du fichier uploadé.
 
-Dans notre cas le GIF ne sert a rien mais il est souvent utiliser pour bypass la verification des magic bytes
+Dans notre cas, le GIF ne sert à rien, mais il est souvent utilisé pour bypass la vérification des magic bytes.
+
+-X sert à forcer le type de la requête, exemple : POST, GET, etc.
+-F sert à remplacer une partie du champ de la requête, dans notre cas Upload et uploaded.
+
+solution :
+
+-refuser toute requête venant du fichier /upload
+-parser la requête pour être sûr d’accepter seulement les extensions demandées, exemple : .jpeg, .jpg, .png, etc.
+-vérifier le contenu du fichier
+-renommer le fichier une fois téléchargé pour éviter les mauvaises extensions

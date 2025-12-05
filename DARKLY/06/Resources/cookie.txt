@@ -1,7 +1,13 @@
 explication:
 
-Ici on utilise la faille des cookies non proteger, quand on arrive sur le site qu on fait F12
-que l on vas dans l onglet storqage et ensuite cooki on peut voir un cookie nome I_am_admin, 
-sa valeurs et encrypte en MD5 cest un moyen de crypte la valeur, cette valeur decrypte vaut "false"
-il nous suffit donc de remplacer cette valeur par true dans ce meme lengage (b326b5062b2f0e69046810717534cb09)
-de refresh la page et nous voila avec les droits admin. 
+Ici, on utilise la faille des cookies non protégés. Quand on arrive sur le site et qu’on fait F12,
+puis qu’on va dans l’onglet Storage et ensuite Cookies, on peut voir un cookie nommé I_am_admin.
+Sa valeur est chiffrée en MD5, c’est un moyen de chiffrer la valeur. Cette valeur déchiffrée vaut “false”.
+Il nous suffit donc de remplacer cette valeur par “true”, dans ce même langage (b326b5062b2f0e69046810717534cb09),
+de rafraîchir la page, et nous voilà avec les droits admin.
+
+solution:
+-ne jamais stocker les droit utilisateurs en clair ou dans des cookies
+-utiliser des sessions cote serveur ce qui permet de modifier les droits seulement cote serveur
+-hacher les cookies, ou protégés ses cookies avec les flags httpOnly et secure
+ httpOnly empeche js de lire et modifier les cookies et secure rend impossinle le vole de cookie en httpOnly

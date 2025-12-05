@@ -1,10 +1,11 @@
 expliaction:
 
-Dans ce ctf on a chercher des fichier cacher, pour cela j ai une wordlist qui est la meme
-que dans dirb qui fait tout automatiquement. Le scrypt vas tester les pages les plus utilise.
-Petit soucis sur Darkly meme les pages qui n existe pas nous renvoies des codes 200 comme si 
-ca fonctionnait tres bien, on vas donc devoir comparer la taille. tout les fichier vide ne vont 
-pas etre pris en compte. voici le scrypt : 
+Dans ce CTF, nous avons cherché des fichiers cachés. Pour cela, j’ai utilisé une wordlist identique à celle de dirb, 
+qui effectue ce travail automatiquement. Le script teste les pages les plus courantes.
+
+Cependant, sur Darkly, même les pages inexistantes renvoient un code HTTP 200, comme si elles existaient 
+réellement. Nous devons donc comparer la taille de la réponse. Les fichiers inexistants renverront une page générique 
+dont la taille sera identique, ce qui permet de les filtrer. Voici le script :
 
 #!/bin/bash
 
@@ -24,9 +25,13 @@ while read line; do
     fi
 done < "$wordlist"
 
-une fois ceci fait on voit toutes les pages existente mais non accesible directement depuis la page
-dans cette liste ce qui vas nous interesser c est la page admin et robot.txt.
-en allant dans robots.txt on a deux ligne. On vas recuperer la premiere qui nous envoie vers un site
-on on peut telecharger un fichier nome htpasswd. En le telechargeant on peut voir "root:437394baff5aa33daa618be47b75cb49"
-on decrypt le mdp hashe au format MD5 et on obtient : qwerty123@. Ensuite plus qu a aller sur la 
-page admin/ et ce connecter en tant que root.
+Une fois cela fait, on obtient la liste des pages existantes mais non accessibles directement depuis la page principale. 
+Dans cette liste, ce qui nous intéresse est admin et robots.txt.
+En allant sur robots.txt, on voit deux lignes. On récupère la première, qui nous mène vers un site où l’on peut télécharger 
+un fichier nommé .htpasswd. Dans ce fichier, on trouve : "root:437394baff5aa33daa618be47b75cb49"
+Le mot de passe est hashé en MD5. Après déchiffrement, on obtient : qwerty123@.
+
+Il ne reste plus qu’à aller sur la page /admin/ et se connecter en tant que root.
+
+solution:
+-ne jamais exposer des fichier sensible

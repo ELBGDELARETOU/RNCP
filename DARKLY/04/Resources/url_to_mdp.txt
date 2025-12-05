@@ -1,8 +1,17 @@
 http://localhost:8080/?page=../../../../../../../../../etc/passwd
 
-explication : 
+explication :
 
-Ce qui se passe ici c est un LFI (local file inclusion), c est un test classique pour tester la vulnerabilite et la bonne gestion
-su systeme de page sur le site. La methode $_GET qui permet de naviguer entre les pages n est pas proteger, on peut donc facilement 
-remonter dans l arboresence du serveur pour avoir acces au fichier du site ex: etc/pass, var/log etc ...
-Pourquoi /etc/passwd ? Car c est un fichier present sur toute les serveurs Linux.
+Ce qui se passe ici, c’est un LFI (Local File Inclusion). C’est un test classique pour vérifier la vulnérabilité et la bonne gestion
+du système de pages sur le site. La méthode $_GET, qui permet de naviguer entre les pages, n’est pas protégée,
+on peut donc facilement remonter dans l’arborescence du serveur pour avoir accès aux fichiers du site,
+par exemple : /etc/passwd, /var/log, etc.
+
+Pourquoi /etc/passwd ?
+Parce que c’est un fichier présent sur tous les serveurs Linux.
+
+solution:
+-utiliser une liste avec les pages possible d acces et rejeter le reste
+-interdire certain caractères (.., /, etc...)
+-desactiver allow_url_include qui permet de gerer les RFI
+-utliser realpath() pour pour verifier que les fichier soit dans les bon dossiers 

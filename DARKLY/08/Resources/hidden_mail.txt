@@ -1,6 +1,10 @@
-explication:
-Ici on peut tout simplement modifier l adresse mail sur laquelle on recoit le mail pour reinisialiser son mdp.
+explication :
+Ici, on peut tout simplement modifier l’adresse mail sur laquelle on reçoit le mail pour réinitialiser son mot de passe.
+Pour tester, il suffit de faire comme si on avait oublié son mot de passe, aller dans la section Network de l’inspecteur pour pouvoir
+récupérer la requête en curl et pouvoir modifier le mot de passe.
 
-solution pour securiser:
-2fa, re-demander le mail pour verifier l identite, et ne surtout pas utiliser de variable cacher pour une donne aussi sensible que le mail de l admin.
-hiden n est pas du tout un mecanisme de securiter.
+solution :
+-2FA
+-redemander l’email pour vérifier l’identité
+-ne surtout pas utiliser de variable cachée pour une donnée aussi sensible que l’email de l’admin.
+ hidden n’est pas du tout un mécanisme de sécurité.

@@ -1,5 +1,8 @@
-explication:
+explication :
 
-Ici le problemes est que les valeurs ne sont pas proteger on peut donc recuprer la requete
-et en utilisant une commande curl modifier la valeur qui theoriquement ne peut pas etre supperieur
-a 10.w
+Ici, le problème est que les valeurs ne sont pas protégées. On peut donc récupérer la requête
+et, en utilisant une commande curl, modifier la valeur qui, théoriquement, ne peut pas être supérieure
+à 10.
+
+solution :
+– toujours valider les données côté serveur

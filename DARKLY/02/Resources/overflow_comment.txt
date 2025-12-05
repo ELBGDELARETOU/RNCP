@@ -1,1 +1,8 @@
-la db n est pas proteger contre l overflow de commentaire ?
+explication :
+
+hypothèse 1 : la base de données n’est pas protégée contre l’overflow de commentaires
+hypothèse 2 : il y a un fichier qui a une place limitée et qui overflow
+
+solution :
+-limiter la taille du champs coter serveur ainsi que celle du nombre de commentaires
+-ne jamais faire confiance au front end

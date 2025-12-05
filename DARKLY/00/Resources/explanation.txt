@@ -1,6 +1,12 @@
-explication:
+epxlication:
 
-les identifiants sont envoyes dans l URL en utilisant une methode GET et non POST,
-tout est donc visible dans l URL,il suffit de faire un script python qui en calquant l URL
-vas en boucle envoyer des requettes GET pour tester tout un tas de mots de passe depuis
-rockyou qui est une base de donnees de mot de passe les plus souvent utiliser.
+Les identifiants sont envoyés dans l’URL en utilisant une méthode GET et non POST,
+tout est donc visible dans l’URL. Il suffit de faire un script Python qui, en calquant l’URL,
+va en boucle envoyer des requêtes GET pour tester tout un tas de mots de passe depuis
+rockyou, qui est une base de données de mots de passe les plus souvent utilisés.
+
+solution:
+-utiliser POST et non GET
+-etre en https
+-2FA
+-limiter le nombre d essaie de connexion

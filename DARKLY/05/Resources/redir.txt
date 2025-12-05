@@ -1,11 +1,15 @@
 http://localhost:8080/index.php?page=redirect&site=youtube.fr
 
 
-
-explication (OPEN REDIRECT):
+explication (OPEN REDIRECT) :
 
 Le site ne contrôle pas les redirections, on peut donc rediriger vers n’importe quel site.
 L’URL est trouvée en faisant F12 et en modifiant le site d’arrivée.
-Cette faille est le plus souvent utilisée pour du phishing, donnant confiance à l’utilisateur en voyant une URL avec un site de “confiance” mais qui redirige vers un site malveillant.
+Cette faille est le plus souvent utilisée pour du phishing, donnant confiance à l’utilisateur en voyant une URL avec un site de “confiance”, mais qui redirige vers un site malveillant.
 La solution pour éviter ça serait de faire une liste qui énumère les sites exacts vers lesquels nous avons le droit de rediriger.
-On peut aussi passer par une page supplémentaire qui nous avertit que nous changeons de site et de faire attention.
+On peut aussi passer par une page supplémentaire qui nous avertit que nous changeons de site et qu’il faut faire attention.
+
+solution :
+-utilisée une liste de site autoriser
+-ajouter une page de d avertissement avant la redirections
+-faire des redirection interne (chemins en dure gerer par le back)

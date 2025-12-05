@@ -1,6 +1,6 @@
 explication:
-Ici en inspectant la page link tout en bas, on se rend compte que des commentaires on ete laisse
-en suivant ce qui est demande on construit cette requette: 
+Ici, en inspectant la page link tout en bas, on se rend compte que des commentaires ont été laissés.
+En suivant ce qui est demandé, on construit cette requête :
 
 curl 'http://localhost:8080/index.php?page=b7e44c7a40c5f80139f0a50f3650fb2bd8d00b0d24667c4c2ca32c88e13b758f' \
   --compressed \
@@ -20,5 +20,8 @@ curl 'http://localhost:8080/index.php?page=b7e44c7a40c5f80139f0a50f3650fb2bd8d00
   -H 'Pragma: no-cache' \
   -H 'Cache-Control: no-cache' | grep flag 
 
-on remplace user agent par ft_bornToSec car dans les commentaires on nous demande d'utiliser ce browser,
-en suite la meme chose pour "www.nsa.gov" ou on nous dis que nous venon de ce site ce qui fait reference a 'Referer'
+On remplace le User-Agent par ft_bornToSec, car dans les commentaires on nous demande d’utiliser ce “browser”.
+Ensuite, on fait la même chose pour www.nsa.gov où l’on nous dit que nous venons de ce site, ce qui fait référence au header Referer.
+
+solution :
+– ne pas laisser de commentaires qui peuvent aider à quoi que ce soit dans le code lisible par tout le monde

@@ -1,41 +1,162 @@
 <!DOCTYPE html>
-<html lang="us">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>CAMAGRAM</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camagru</title>
+
     <style>
+        @font-face {
+            font-family: "MaPolice";
+            src: url("./fonts/KyrillaSansSerif-Black.ttf") format("truetype");
+        }
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "MaPolice";
+            background-color: #f5f5f5;
         }
 
-        header {
-            width: 90%;
-            margin: 20px auto 0;
-            /* padding: 20px 40px; */
-            /* background-color: #ddcbcb;  */
-            color: rgb(36, 35, 35);           
-            /* border-radius: 10px; */
-            text-align: center;
-            /* box-shadow: 0 4px 8px rgba(0,0,0,0.2); */
-            
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 2px;
+            padding-bottom: 80px;
         }
 
-        header h1 {
-            margin: 0;
-            font-size: 2em;
+        .grid img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
         }
+
+        .bottom-bar {
+            position: fixed;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 20px;
+                
+            /* Effet glass */
+            background-color: rgba(255, 255, 255, 0.2); /* semi-transparent */
+            backdrop-filter: blur(10px); /* flou derrière l'élément */
+            -webkit-backdrop-filter: blur(10px); /* pour Safari */
+            box-shadow: 0 4px 30px rgba(0,0,0,0.1); /* ombre douce */
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgb(0, 0, 0);
+        }
+
+        .button {
+            padding: 8px 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .button-link {
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+        }
+
     </style>
 </head>
-<body>
-    <header>
-        <h1>Camaguru</h1>
-    </header>
 
-    <main>
-    </main>
+<body>
+
+    <div class="grid">
+        <!-- Tu rajoutes autant d’images que tu veux -->
+        <img src="https://picsum.photos/300/300?1">
+        <img src="https://picsum.photos/300/300?2">
+        <img src="https://picsum.photos/300/300?3">
+        <img src="https://picsum.photos/300/300?4">
+        <img src="https://picsum.photos/300/300?5">
+        <img src="https://picsum.photos/300/300?6">
+        <img src="https://picsum.photos/300/300?7">
+        <img src="https://picsum.photos/300/300?8">
+        <img src="https://picsum.photos/300/300?9">
+        <img src="https://picsum.photos/300/300?10">
+        <img src="https://picsum.photos/300/300?11">
+        <img src="https://picsum.photos/300/300?12">
+        <img src="https://picsum.photos/300/300?13">
+        <img src="https://picsum.photos/300/300?14">
+        <img src="https://picsum.photos/300/300?15">
+        <img src="https://picsum.photos/300/300?16"> 
+        <img src="https://picsum.photos/300/300?17">
+        <img src="https://picsum.photos/300/300?2">
+        <img src="https://picsum.photos/300/300?3">
+        <img src="https://picsum.photos/300/300?4">
+        <img src="https://picsum.photos/300/300?5">
+        <img src="https://picsum.photos/300/300?6">
+        <img src="https://picsum.photos/300/300?6">
+        <img src="https://picsum.photos/300/300?6">
+        <img src="https://picsum.photos/300/300?6">
+        <img src="https://picsum.photos/300/300?6">
+        <img src="https://picsum.photos/300/300?6">
+        <img src="https://picsum.photos/300/300?6">
+        <img src="https://picsum.photos/300/300?6">
+        <img src="https://picsum.photos/300/300?6">
+        <img src="https://picsum.photos/300/300?6">
+        <img src="https://picsum.photos/300/300?6"> 
+        <img src="https://picsum.photos/300/300?1">
+        <img src="https://picsum.photos/300/300?2">
+        <img src="https://picsum.photos/300/300?3">
+        <img src="https://picsum.photos/300/300?4">
+        <img src="https://picsum.photos/300/300?5">
+        <img src="https://picsum.photos/300/300?6">
+        <img src="https://picsum.photos/300/300?6">
+        <img src="https://picsum.photos/300/300?6">
+        <img src="https://picsum.photos/300/300?6">
+        <img src="https://picsum.photos/300/300?6">
+        <img src="https://picsum.photos/300/300?6">
+        <img src="https://picsum.photos/300/300?6">
+        <img src="https://picsum.photos/300/300?6">
+        <img src="https://picsum.photos/300/300?6">
+        <img src="https://picsum.photos/300/300?6">
+        <img src="https://picsum.photos/300/300?6"> 
+        <img src="https://picsum.photos/300/300?1">
+        <img src="https://picsum.photos/300/300?2">
+        <img src="https://picsum.photos/300/300?3">
+        <img src="https://picsum.photos/300/300?4">
+        <img src="https://picsum.photos/300/300?5">
+        <img src="https://picsum.photos/300/300?6">
+        <img src="https://picsum.photos/300/300?6">
+        <img src="https://picsum.photos/300/300?6">
+        <img src="https://picsum.photos/300/300?6">
+        <img src="https://picsum.photos/300/300?6">
+        <img src="https://picsum.photos/300/300?6">
+        <img src="https://picsum.photos/300/300?6">
+        <img src="https://picsum.photos/300/300?6">
+        <img src="https://picsum.photos/300/300?6">
+        <img src="https://picsum.photos/300/300?6">
+        <img src="https://picsum.photos/300/300?6"> 
+    </div>
+
+    <div class="bottom-bar">
+        <a href="profile.html">
+            <div class="avatar"></div>
+        </a>
+
+        <a href="post.html" class="button-link">
+            <div class="button">POST</div>
+        </a>
+
+        <a href="settings.html" class="button-link">
+            <div class="button">SETTINGS</div>
+        </a>
+    </div>
+
+
 </body>
 </html>
-
-
-sdfsfdsfdsfdsfsdfdsfsdf

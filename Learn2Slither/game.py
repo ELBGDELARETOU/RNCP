@@ -1,5 +1,5 @@
 from random import randrange
-
+import pygame 
 class SnakeGame:
     def __init__(self):
         self.width = 10
@@ -102,12 +102,47 @@ class SnakeGame:
 
 
 
-game = SnakeGame()
-print("Etat initial:", game._get_state())
+def draw_game(screen, game):
+    screen.fill((0,0,0))  # fond noir
 
-for i in range(5):
-    state, reward, done = game.step(0)
-    print(f"Step {i}: Score={game.score}, Reward={reward}, Done={done}")
-    if done:
-        break
-print("Etat pas initial:", game._get_state())
+    # Dessiner le serpent
+    for x, y in game.snake:
+        pygame.draw.rect(screen, (0,255,0), (x*game.cell_size, y*game.cell_size, game.cell_size, game.cell_size))
+
+    # Dessiner pomme verte
+    gx, gy = game.g_apple
+    pygame.draw.rect(screen, (0,200,0), (gx*game.cell_size, gy*game.cell_size, game.cell_size, game.cell_size))
+
+    # Dessiner pomme rouge
+    rx, ry = game.r_apple
+    pygame.draw.rect(screen, (255,0,0), (rx*game.cell_size, ry*game.cell_size, game.cell_size, game.cell_size))
+
+    pygame.display.flip()
+
+# --- Boucle principale ---
+def main():
+    pygame.init()
+    game = SnakeGame()
+    screen = pygame.display.set_mode((game.width*game.cell_size, game.height*game.cell_size))
+    clock = pygame.time.Clock()
+
+    running = True
+    while running:
+        clock.tick(5)  # 5 FPS (tu peux augmenter pour accélérer le jeu)
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+
+        # --- Pour test automatique : avance toujours tout droit ---
+        state, reward, done = game.step(0)
+        draw_game(screen, game)
+
+        if done:
+            pygame.time.wait(1000)
+            game._reset()
+
+    pygame.quit()
+
+if __name__ == "__main__":
+    main()

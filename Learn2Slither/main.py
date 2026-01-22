@@ -20,16 +20,27 @@ def main():
 
     while running:
         clock.tick(5)
+
+        action = 0
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
 
-        game.step(0)
-        draw_game(screen, game)
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_LEFT:
+                print("con")
+                action = 1
+            elif event.key == pygame.K_RIGHT:
+                print("bon")
+                action = 2
 
+        game.step(action)
+        draw_game(screen, game)
+        
         if game.game_over:
             pygame.time.wait(1000)
             game._reset()
+
     pygame.quit()
 
 if __name__ == "__main__":

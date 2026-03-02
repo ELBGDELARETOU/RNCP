@@ -26,13 +26,11 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
 
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_LEFT:
-                print("con")
-                action = 1
-            elif event.key == pygame.K_RIGHT:
-                print("bon")
-                action = 2
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_LEFT:
+                    action = 1
+                elif event.key == pygame.K_RIGHT:
+                    action = 2
 
         game.step(action)
         draw_game(screen, game)

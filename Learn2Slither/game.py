@@ -26,7 +26,6 @@ class SnakeGame:
         self.score = 0
         self.game_over = False
 
-
     def _update_direction(self, action):
         dx, dy = self.direction
 
@@ -90,7 +89,7 @@ class SnakeGame:
             reward = -10
 
             self.snake.pop()
-            if len(self.snake) > 0:
+            if len(self.snake) > 1:
                 self.snake.pop()
             else:
                 self.game_over = True
